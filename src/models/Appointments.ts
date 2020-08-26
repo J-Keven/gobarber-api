@@ -7,7 +7,7 @@ export default class Appotments {
 
   date: Date;
 
-  constructor(provider: string, date: Date) {
+  constructor({ provider, date }: Omit<Appotments, 'id'>) {
     this.id = uuid();
     this.provider = provider;
     this.date = date;
