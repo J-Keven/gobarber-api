@@ -29,6 +29,7 @@ class CreateUsersService {
 
     await usersRepository.save(newUser);
 
+    delete newUser.password;
     return newUser;
   }
 }
