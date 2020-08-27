@@ -1,4 +1,5 @@
 import express from 'express';
+import 'reflect-metadata';
 
 import logs from './middlewares/logsModdleware';
 import appoitmentsRoute from './routes/appointmentsRoutes';
