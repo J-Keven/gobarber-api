@@ -5,21 +5,17 @@ const sessionRoutes = Router();
 
 sessionRoutes.post('/', async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.headers);
-  try {
-    const authtorizationUserService = new AuthtorizationUserService();
 
-    const { user, token } = await authtorizationUserService.execute({
-      email,
-      password,
-    });
+  const authtorizationUserService = new AuthtorizationUserService();
 
-    delete user.password;
+  const { user, token } = await authtorizationUserService.execute({
+    email,
+    password,
+  });
 
-    return res.json({ user, token });
-  } catch (err) {
-    return res.status(400).json({ error: err.message });
-  }
+  delete user.password;
+
+  return res.json({ user, token });
 });
 
 export default sessionRoutes;

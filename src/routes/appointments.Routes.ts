@@ -4,8 +4,10 @@ import { parseISO } from 'date-fns';
 
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 import CreateAppointmentsServece from '../services/CreateAppointmentsServece';
+import ensureAtheticated from '../middlewares/ensureAuthenticated';
 
 const appointmentsRoute = Router();
+appointmentsRoute.use(ensureAtheticated);
 
 appointmentsRoute.get('/', async (req, res) => {
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
@@ -18,19 +20,14 @@ appointmentsRoute.post('/', async (req, res) => {
   const { provider_id, date } = req.body;
 
   const parsedDate = parseISO(date);
+  const createAppointmentsServece = new CreateAppointmentsServece();
 
-  try {
-    const createAppointmentsServece = new CreateAppointmentsServece();
+  const appointments = await createAppointmentsServece.execute({
+    provider_id,
+    date: parsedDate,
+  });
 
-    const appointments = await createAppointmentsServece.execute({
-      provider_id,
-      date: parsedDate,
-    });
-
-    return res.json(appointments);
-  } catch (err) {
-    return res.status(400).json({ error: err.message });
-  }
+  return res.json(appointments);
 });
 
 export default appointmentsRoute;
