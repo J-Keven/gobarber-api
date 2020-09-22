@@ -6,9 +6,9 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "yarn build && node dist/server.js",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev -r tsconfig-paths/register node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -25,6 +25,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.0",
     "ts-node-dev": "^1.0.0-pre.60",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.2"
   },
   "dependencies": {
@@ -38,6 +39,7 @@
     "multer": "^1.4.2",
     "pg": "^8.3.2",
     "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.3.0",
     "typeorm": "^0.2.25",
     "uuidv4": "^6.2.3"
   }
