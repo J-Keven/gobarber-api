@@ -47,7 +47,7 @@ describe('UpdateUserAvatar', () => {
     ).rejects.toBeInstanceOf(AppError);
   });
 
-  it('should be able to update users avatar who already has an avatar', async () => {
+  it('should delete old avatar when updating new one', async () => {
     const fakeUserRepository = new FakeUserRepository();
 
     const user = await fakeUserRepository.create({
@@ -55,10 +55,9 @@ describe('UpdateUserAvatar', () => {
       password: '123456',
       name: 'jhonas',
     });
-    const filename =
-      '53f97d00cb3d665e-WhatsApp Image 2020-01-13 at 15.50.07.jpeg';
-
     const fakeStorageProviderRepository = new FakeStorageProviderRepository();
+
+    const deletefile = jest.spyOn(fakeStorageProviderRepository, 'delete');
 
     const updateUserAvatarService = new UpdateUserAvatarService(
       fakeUserRepository,
@@ -67,15 +66,16 @@ describe('UpdateUserAvatar', () => {
 
     await updateUserAvatarService.execute({
       id: user.id,
-      filename: `12-${filename}`,
+      filename: 'avatar.jpeg',
     });
 
     const response = await updateUserAvatarService.execute({
       id: user.id,
-      filename,
+      filename: 'avatar2.jpeg',
     });
 
+    expect(deletefile).toHaveBeenCalledWith('avatar.jpeg');
     expect(response).toHaveProperty('avatar');
-    expect(response.avatar).toBe(filename);
+    expect(response.avatar).toBe('avatar2.jpeg');
   });
 });
