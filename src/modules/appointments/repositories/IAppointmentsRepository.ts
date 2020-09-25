@@ -6,4 +6,4 @@ export default interface IAppointmentsRepository {
   findByDate(date: Date): Promise<Appointments | undefined>;
 }
 
-// Aplicando mais um princípio solid LSP - Liskov substitution Principle
+// Aplicando o princípio LSP - Liskov substitution Principle
