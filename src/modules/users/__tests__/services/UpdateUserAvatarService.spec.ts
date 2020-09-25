@@ -1,0 +1,81 @@
+import FakeStorageProviderRepository from '@shared/container/providers/fake/FakeStorageProviderRepository';
+import FakeUserRepository from '@modules/users/repositories/fake/FakeUserRepository';
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
+import AppError from '@shared/errors/AppError';
+
+describe('UpdateUserAvatar', () => {
+  it('should be able to update the users avatar', async () => {
+    const fakeUserRepository = new FakeUserRepository();
+
+    const user = await fakeUserRepository.create({
+      email: 'jhonas@gmail.com',
+      password: '123456',
+      name: 'jhonas',
+    });
+    const fakeStorageProviderRepository = new FakeStorageProviderRepository();
+    const updateUserAvatarService = new UpdateUserAvatarService(
+      fakeUserRepository,
+      fakeStorageProviderRepository,
+    );
+    const filename =
+      '53f97d00cb3d665e-WhatsApp Image 2020-01-13 at 15.50.07.jpeg';
+
+    const response = await updateUserAvatarService.execute({
+      id: user.id,
+      filename,
+    });
+
+    expect(response).toHaveProperty('avatar');
+    expect(response.avatar).toBe(filename);
+  });
+
+  it('should not be able to update the users avatar with id nonexistent', async () => {
+    const fakeUserRepository = new FakeUserRepository();
+    const fakeStorageProviderRepository = new FakeStorageProviderRepository();
+    const updateUserAvatarService = new UpdateUserAvatarService(
+      fakeUserRepository,
+      fakeStorageProviderRepository,
+    );
+    const filename =
+      '53f97d00cb3d665e-WhatsApp Image 2020-01-13 at 15.50.07.jpeg';
+
+    expect(
+      updateUserAvatarService.execute({
+        id: '123123123-Jonh-Doe',
+        filename,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+
+  it('should be able to update users avatar who already has an avatar', async () => {
+    const fakeUserRepository = new FakeUserRepository();
+
+    const user = await fakeUserRepository.create({
+      email: 'jhonas@gmail.com',
+      password: '123456',
+      name: 'jhonas',
+    });
+    const filename =
+      '53f97d00cb3d665e-WhatsApp Image 2020-01-13 at 15.50.07.jpeg';
+
+    const fakeStorageProviderRepository = new FakeStorageProviderRepository();
+
+    const updateUserAvatarService = new UpdateUserAvatarService(
+      fakeUserRepository,
+      fakeStorageProviderRepository,
+    );
+
+    await updateUserAvatarService.execute({
+      id: user.id,
+      filename: `12-${filename}`,
+    });
+
+    const response = await updateUserAvatarService.execute({
+      id: user.id,
+      filename,
+    });
+
+    expect(response).toHaveProperty('avatar');
+    expect(response.avatar).toBe(filename);
+  });
+});

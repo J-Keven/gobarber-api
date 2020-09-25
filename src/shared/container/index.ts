@@ -5,6 +5,7 @@ import UserRepository from '@modules/users/infra/typeorm/repositories/UserReposi
 
 import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import AppointmentRepository from '@modules/appointments/infra/typeorm/repositories/AppointmentsRepository';
+import './providers';
 
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 container.registerSingleton<IAppointmentRepository>(

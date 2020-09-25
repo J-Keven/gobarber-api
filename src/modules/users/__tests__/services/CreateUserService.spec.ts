@@ -19,7 +19,6 @@ describe('CreateUser', () => {
 
     const user = await createUserService.execute(userData);
 
-    // expect(user).toHaveLength(6);
     expect(user).toHaveProperty('id');
     expect(user.avatar).toBeUndefined();
     expect(user.email).toBe('jhonas@gmail.com');
