@@ -1,68 +1,87 @@
-# GoBarber Api
+<h3 align="center">
+  <img alt="GoStack" src="assets/Logo.png" />
+</h3>
+
+<p align="center">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/J-Keven/gobarber-api?color=blue">
+
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue">
+
+  <a href="https://github.com/J-keven/gobarber-api/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/J-Keven/gobarber-api?style=social">
+  </a>
+</p>
 
 
-## Requisios
-### Recuperação de senha
+<p align="center">
+  <a href="#rocket-sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#fire-requisios">Requisitos</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#fire-como-usar">Como Usar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#rocket-como-contribuir">Como Contribuir</a>&nbsp;&nbsp;&nbsp;
+  <!-- <a href="#memo-licença">Licença</a> -->
+</p>
 
-**RF**
-- O usuário deve poder recuperar sua senha informando o seu E-mail.
-- O usuário deve poder receber um E-mail com instruçõe para recuperar seu senha.
-- O usuário deve poder resetar sua senha.
+## 💈Sobre
+O Gobarber é uma aplicação para agendamento de horários em barbearia, onde um cabeleleiro/barbeiro pode cadastrar um horári disponível e o cliente poderá agendar um horário com o cabeleleiro/barbeiro 💈.
+## 🔥Requisios
+Para ver os requisitos da aplicação [click aqui]('https://github.com/J-Keven/Nodejs-Fundamentals-Challenge/blob/master/requisitos.md')
+## 🔥Como usar
 
-**RNF**
-- Utilizar o meiotrap para envio de E-mails em ambiente dev.
-- Utilizar o Amazon SES para envio de E-mails em ambiente de produção dev.
-- O envio de E-mails deve acontecer em segundo plano (background job)
+- ### **Pré-requisitos**
 
-**RN**
-- O link de recuperação deve inspirar em 2h.
-- O usuário deve confirmar a nova senha ao resetar a senha.
-- O envio do E-mail so deve acontecer se existir uma conta cadastradado com o email informado.
+  - É **necessário** possuir o **[Node.js](https://nodejs.org/en/) v12x** instalado na máquina
+  - Também, é **preciso** ter um gerenciador de pacotes seja o **[NPM](https://www.npmjs.com/)** ou **[Yarn](https://yarnpkg.com/)**.
+  - É importante que tenha um **banco Sql** rodando na sua máquina, de preferência postgreSQL.
 
-### Atualização do perfil
-**RF**
-- O usuário deve poder atualizar o nome, email e senha.
+1. Faça um clone :
 
-**RN**
-- O usuário não pode autualizar o seu E-mail para um E-mail ja cadastrado.
-- Para atualizar a senha, o usuário deve informar a antiga senha.
-- Para atualizar a senha, o usuário deve confirmar a nova senha.
+```sh
+  $ git clone https://github.com/J-Keven/gobarber-api.git
+```
+2. Entre na pasta da aplicação:
+  ```sh
+    $ cd gobarber-api
+  ```
+3. Alterando as informações de conexão com o Banco:
+  - Abra o arquivo ``ormconfig.json`` as informaçõe do seu banco.
+  ```json
+  {
+    "type": "postgres", //banco que está usando
+    "host": "localhost", //onde está sendo executado
+    "port": 5432,
+    "username": "postgres", // username do banco de dados
+    "password": "docker", //senha do banco de dados
+    "database": "gobarber", //nome do banco de dados
+  }
+  ```
+4. Instale as depedências:
+```sh
+  # Instale as dependências
+  $ yarn
+```
 
-### Painel do prestador
+5. Executando a Aplicação:
+```sh
+  # Inicie a API no mode de dev
+  $ yarn dev:server
 
-**RF**
-- O usuário deve poder listar todos os seu agendamentos em um dia específico.
-- O prestador deve poder receber uma notificação sempre que houver um novo agendamento.
-- O prestador deve poder visualizar as notificações não lidas.
+  # Inicie a API no ambiente de produção
+  $ yarn start
+```
 
-**RNF**
-- Osagendamentos do prestador no dia  devem ser armazeanda em cache.
-- As notificaçõe do prestador devem ser armazenadas no MongoDB
-- As notificaçõe do prestador devem ser enviadas usando o socket.io.
+## 🚀 Como contribuir
 
-**RN**
-- A notificaçõe devem ter um status de lida e não-lida
+- Faça um fork desse repositório;
+- Cria uma branch com a sua feature: `git checkout -b minha-feature`;
+- Faça commit das suas alterações: `git commit -m 'feat: Minha nova feature'`;
+- Faça push para a sua branch: `git push origin minha-feature`.
 
-### Agendamento de Senviço
-**RF**
-- O usuário deve poder listar todos os prestadores de serviços cadastrados.
-- O usuário deve poder listar todos todos os dias de um mês disponível de um prestador.
-- O usuário deve poder listar todos todos os horários de um dia disponível de um prestador.
-- O usuário deve poder realizar um novo agendameto com um prestador.
+Depois que o merge da sua pull request for feito, você pode deletar a sua branch.
 
-**RNF**
-- A listagem de prestadores devem ser armazendas em cache.
+## 📝Licença
 
-**RN**
-- Cada agendamento deve durar exatamente 1h.
-- Os agendamentos devem estar disponíveis entre 8hrs e 18hrs.
-- O usuário não pode agendar em um horáro já ocupado.
-- O usuário não pode agendar em um horáro já ocupado.
-- O usuário não pode agendar um serviço consigo mesmo.
+Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
-<!-- <ul>
-<li><input type="checkbox" checked> Fazer login</li>
-<li><input type="checkbox" checked> Criar uma conta</li>
-<li><input type="checkbox" checked> Fazer upload do avatar</li>
-<li><input type="checkbox"> Recuperar senha</li>
-</ul> -->
+---
+
+Feito com 💜 by [J-keven](github.com/j-keven) :wave: [Entre na nossa comunidade!](https://discordapp.com/invite/gCRAFhc)
