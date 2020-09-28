@@ -1,5 +1,7 @@
 <h3 align="center">
-  <img alt="GoStack" src="assets/Logo.png" />
+  <span style="background-color: #312E38">
+  <img alt="GoStack" src="assets/Logo.png" style="background-color: #312E38"/>
+  </span>
 </h3>
 
 <p align="center">
@@ -46,12 +48,12 @@ Para ver os requisitos da aplicação [click aqui]('https://github.com/J-Keven/N
   - Abra o arquivo ``ormconfig.json`` as informaçõe do seu banco.
   ```json
   {
-    "type": "postgres", //banco que está usando
-    "host": "localhost", //onde está sendo executado
+    "type": "postgres",
+    "host": "localhost",
     "port": 5432,
-    "username": "postgres", // username do banco de dados
-    "password": "docker", //senha do banco de dados
-    "database": "gobarber", //nome do banco de dados
+    "username": "postgres",
+    "password": "docker",
+    "database": "gobarber",
   }
   ```
 4. Instale as depedências:
