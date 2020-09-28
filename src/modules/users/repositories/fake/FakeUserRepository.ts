@@ -3,7 +3,7 @@ import ICReateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import User from '@modules/users/infra/typeorm/entities/Users';
 
-class UserRepositor implements IUserRepository {
+class UserRepository implements IUserRepository {
   private users: User[] = [];
 
   public async findById(id: string): Promise<User | undefined> {
@@ -45,4 +45,4 @@ class UserRepositor implements IUserRepository {
   }
 }
 
-export default UserRepositor;
+export default UserRepository;

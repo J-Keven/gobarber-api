@@ -1,9 +1,8 @@
-import 'reflect-metadata';
 import { injectable, inject } from 'tsyringe';
 import Users from '@modules/users/infra/typeorm/entities/Users';
 import AppError from '@shared/errors/AppError';
 import IUserRepository from '../repositories/IUserRepository';
-import IHashProvider from '../infra/providers/hashProviders/models/IHashProvider';
+import IHashProvider from '../infra/providers/hashProviders/model/IHashProvider';
 
 interface IRequestDTO {
   name: string;
@@ -20,7 +19,7 @@ class CreateUsersService {
   constructor(
     @inject('UserRepository')
     userRepository: IUserRepository,
-    @inject('BCryptHashProviders')
+    @inject('HashProviders')
     hashProvider: IHashProvider,
   ) {
     this.userRepository = userRepository;

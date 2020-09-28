@@ -1,4 +1,4 @@
-import FakeStorageProviderRepository from '@shared/container/providers/fake/FakeStorageProviderRepository';
+import FakeStorageProviderRepository from '@shared/container/providers/StoregeProviders/fake/FakeStorageProvider';
 import FakeUserRepository from '@modules/users/repositories/fake/FakeUserRepository';
 import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 import AppError from '@shared/errors/AppError';
@@ -8,9 +8,9 @@ describe('UpdateUserAvatar', () => {
     const fakeUserRepository = new FakeUserRepository();
 
     const user = await fakeUserRepository.create({
-      email: 'jhonas@gmail.com',
+      name: 'Jonh Doe',
+      email: 'johndoe@gmail.com',
       password: '123456',
-      name: 'jhonas',
     });
     const fakeStorageProviderRepository = new FakeStorageProviderRepository();
     const updateUserAvatarService = new UpdateUserAvatarService(
@@ -51,10 +51,11 @@ describe('UpdateUserAvatar', () => {
     const fakeUserRepository = new FakeUserRepository();
 
     const user = await fakeUserRepository.create({
-      email: 'jhonas@gmail.com',
+      name: 'Jonh Doe',
+      email: 'johndoe@gmail.com',
       password: '123456',
-      name: 'jhonas',
     });
+
     const fakeStorageProviderRepository = new FakeStorageProviderRepository();
 
     const deletefile = jest.spyOn(fakeStorageProviderRepository, 'delete');
