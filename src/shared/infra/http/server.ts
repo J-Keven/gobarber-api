@@ -17,19 +17,19 @@ app.use(logs);
 app.use('/file', express.static(uploadConfig.uploadPath));
 app.use(routes);
 
-// app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-//   if (err instanceof AppError) {
-//     return res.status(err.statusCode).json({
-//       status: 'Error',
-//       message: err.message,
-//     });
-//   }
+app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+  if (err instanceof AppError) {
+    return res.status(err.statusCode).json({
+      status: 'Error',
+      message: err.message,
+    });
+  }
 
-//   return res.status(500).json({
-//     status: 'Error',
-//     message: 'Intarnal server error',
-//   });
-// });
+  return res.status(500).json({
+    status: 'Error',
+    message: 'Intarnal server error',
+  });
+});
 
 const PORT = process.env.PORT || 3333;
 

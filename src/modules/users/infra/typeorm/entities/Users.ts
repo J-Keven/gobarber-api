@@ -11,7 +11,7 @@ import {
  ** qualquer pessoa consiga entender;
  */
 
-@Entity()
+@Entity('users')
 class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;

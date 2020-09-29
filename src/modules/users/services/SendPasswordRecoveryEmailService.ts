@@ -35,8 +35,11 @@ class SendForgoPasswordEmail {
       throw new AppError('The E-mail do not exist', 400);
     }
 
-    await this.userTokensrRepository.generate(user.id);
-    await this.sendEmail.sendEmail(email, 'Email de recuperação de senha');
+    const { token } = await this.userTokensrRepository.generate(user.id);
+    await this.sendEmail.sendEmail(
+      email,
+      `Email de recuperação de senha. Token: ${token}`,
+    );
   }
 }
 
