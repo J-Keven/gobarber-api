@@ -4,7 +4,7 @@ import AppError from '@shared/errors/AppError';
 import FakeUserTokenReposory from '@modules/users/repositories/fake/FakeUserTokenRepository';
 import IUserRepository from '../../repositories/IUserRepository';
 import IUserTokenRepository from '../../repositories/IUserTokenRepository';
-import SendForgotPasswordEmailService from '../../services/SendForgotPasswordEmailService';
+import SendForgotPasswordEmailService from '../../services/SendPasswordRecoveryEmailService';
 import FakeUserRepository from '../../repositories/fake/FakeUserRepository';
 
 let fakeUserRepository: IUserRepository;

@@ -26,7 +26,7 @@
 ## 💈Sobre
 O Gobarber é uma aplicação para agendamento de horários em barbearia, onde um cabeleleiro/barbeiro pode cadastrar um horári disponível e o cliente poderá agendar um horário com o cabeleleiro/barbeiro 💈.
 ## 🔥Requisios
-Para ver os requisitos da aplicação [click aqui]('https://github.com/J-Keven/Nodejs-Fundamentals-Challenge/blob/master/requisitos.md')
+Para ver os requisitos da aplicação [click aqui](https://github.com/J-Keven/Gobarber-api/blob/master/requisitos.md)
 ## 🔥Como usar
 
 - ### **Pré-requisitos**

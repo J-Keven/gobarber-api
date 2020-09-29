@@ -43,9 +43,11 @@ class ResetPasswordService {
     const createdAt = userToken.created_at;
 
     const customDate = addHours(createdAt, 2);
+
     if (isAfter(Date.now(), customDate)) {
       throw new AppError('Token inspired');
     }
+
     user.password = await this.hashProvider.create(password);
 
     await this.userRepository.save(user);

@@ -14,25 +14,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(logs);
-app.use('/file', express.static(uploadConfig.tempPath));
+app.use('/file', express.static(uploadConfig.uploadPath));
 app.use(routes);
 
-app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
-    return res.status(err.statusCode).json({
-      status: 'Error',
-      message: err.message,
-    });
-  }
+// app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
+//   if (err instanceof AppError) {
+//     return res.status(err.statusCode).json({
+//       status: 'Error',
+//       message: err.message,
+//     });
+//   }
 
-  return res.status(500).json({
-    status: 'Error',
-    message: 'Intarnal server error',
-  });
-});
+//   return res.status(500).json({
+//     status: 'Error',
+//     message: 'Intarnal server error',
+//   });
+// });
 
 const PORT = process.env.PORT || 3333;
 
 app.listen(PORT, () => {
-  console.log(`server Started in http://localhost:${PORT}`);
+  console.log(`🚀  server Started in http://localhost:${PORT}`);
 });

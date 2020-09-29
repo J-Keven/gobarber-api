@@ -7,6 +7,7 @@ import IUserTokenRepository from '../repositories/IUserTokenRepository';
 interface IRequestDTO {
   email: string;
 }
+
 @injectable()
 class SendForgoPasswordEmail {
   private userRepository: IUserRepository;
@@ -20,7 +21,7 @@ class SendForgoPasswordEmail {
     userRepository: IUserRepository,
     @inject('SendEmail')
     sendEmail: ISendEmail,
-    @inject('UserTokensrRepository')
+    @inject('UserTokenRepository')
     userTokensrRepository: IUserTokenRepository,
   ) {
     this.userRepository = userRepository;
@@ -30,7 +31,6 @@ class SendForgoPasswordEmail {
 
   public async execute({ email }: IRequestDTO): Promise<void> {
     const user = await this.userRepository.findByEmail(email);
-
     if (!user) {
       throw new AppError('The E-mail do not exist', 400);
     }
