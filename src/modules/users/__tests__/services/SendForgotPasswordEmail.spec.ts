@@ -1,5 +1,5 @@
-import FakeSendEmail from '@shared/container/providers/SendEmail/fake/FakeSendEmail';
-import ISendEmail from '@shared/container/providers/SendEmail/model/ISendEmail';
+import FakeSendEmail from '@shared/container/providers/SendEmailProvider/fake/FakeSendEmail';
+import ISendEmail from '@shared/container/providers/SendEmailProvider/model/ISendEmail';
 import AppError from '@shared/errors/AppError';
 import FakeUserTokenReposory from '@modules/users/repositories/fake/FakeUserTokenRepository';
 import IUserRepository from '../../repositories/IUserRepository';

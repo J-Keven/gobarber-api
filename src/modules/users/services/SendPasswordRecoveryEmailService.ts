@@ -1,5 +1,6 @@
 import { injectable, inject } from 'tsyringe';
-import ISendEmail from '@shared/container/providers/SendEmail/model/ISendEmail';
+import { resolve } from 'path';
+import ISendEmail from '@shared/container/providers/SendEmailProvider/model/ISendEmail';
 import AppError from '@shared/errors/AppError';
 import IUserRepository from '../repositories/IUserRepository';
 import IUserTokenRepository from '../repositories/IUserTokenRepository';
@@ -36,10 +37,26 @@ class SendForgoPasswordEmail {
     }
 
     const { token } = await this.userTokensrRepository.generate(user.id);
-    await this.sendEmail.sendEmail(
-      email,
-      `Email de recuperação de senha. Token: ${token}`,
+    const fileTemplatePath = resolve(
+      __dirname,
+      '..',
+      'views',
+      'forgotPasswordTemplate.hbs',
     );
+    await this.sendEmail.sendEmail({
+      to: {
+        name: user.name,
+        email: user.email,
+      },
+      subject: '[Gobarber] Recuperação de senha',
+      dataTemplate: {
+        file: fileTemplatePath,
+        variables: {
+          name: user.name,
+          link: `http://localhost:3000/forgotPasswor?token=${token}`,
+        },
+      },
+    });
   }
 }
 
