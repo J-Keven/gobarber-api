@@ -23,7 +23,7 @@ class ResetPasswordService {
     userRepository: IUserRepository,
     @inject('UserTokenRepository')
     userTokenRepository: IUserTokenRepository,
-    @inject('HashProviders')
+    @inject('HashProvider')
     hashProvider: IHasProvider,
   ) {
     this.userRepository = userRepository;

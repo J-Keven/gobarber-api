@@ -19,7 +19,7 @@ class CreateUsersService {
   constructor(
     @inject('UserRepository')
     userRepository: IUserRepository,
-    @inject('HashProviders')
+    @inject('HashProvider')
     hashProvider: IHashProvider,
   ) {
     this.userRepository = userRepository;

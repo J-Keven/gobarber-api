@@ -19,11 +19,11 @@
 
 ### Atualização do perfil
 **RF**
-- O usuário deve poder atualizar o nome, email e senha.
+- O usuário deve poder atualizar o nome, email e senha.✅
 
 **RN**
-- O usuário não pode autualizar o seu E-mail para um E-mail ja cadastrado.
-- Para atualizar a senha, o usuário deve informar a antiga senha.
+- O usuário não pode autualizar o seu E-mail para um E-mail ja cadastrado.✅
+- Para atualizar a senha, o usuário deve informar a antiga senha.✅
 - Para atualizar a senha, o usuário deve confirmar a nova senha.
 
 ### Painel do prestador
