@@ -5,7 +5,23 @@ import User from '@modules/users/infra/typeorm/entities/Users';
 import AppError from '@shared/errors/AppError';
 import FakeHashPovider from '@modules/users/infra/providers/hashProviders/fake/FakeHashProviderRepository';
 
+let fakeUserRepository: FakeUserRepository;
+let fakeHashPovider: FakeHashPovider;
+let createUSerService: CreateUserService;
+let authtorizationUser: AuthtorizationUserService;
 describe('AuthtorizationUser', () => {
+  beforeEach(() => {
+    fakeUserRepository = new FakeUserRepository();
+    fakeHashPovider = new FakeHashPovider();
+    createUSerService = new CreateUserService(
+      fakeUserRepository,
+      fakeHashPovider,
+    );
+    authtorizationUser = new AuthtorizationUserService(
+      fakeUserRepository,
+      fakeHashPovider,
+    );
+  });
   it('should be able to authenticate the user', async () => {
     const user = {
       name: 'jhonnas',
@@ -13,19 +29,7 @@ describe('AuthtorizationUser', () => {
       password: '123456',
     };
 
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashPovider = new FakeHashPovider();
-    const createUSerService = new CreateUserService(
-      fakeUserRepository,
-      fakeHashPovider,
-    );
     await createUSerService.execute(user);
-
-    const authtorizationUser = new AuthtorizationUserService(
-      fakeUserRepository,
-      fakeHashPovider,
-    );
-
     const userAuthetecad = await authtorizationUser.execute({
       email: user.email,
       password: user.password,
@@ -41,20 +45,7 @@ describe('AuthtorizationUser', () => {
       email: 'jhonas@gmail.com',
       password: '123456',
     };
-
-    const fakeUserRepository = new FakeUserRepository();
-    const fakeHashPovider = new FakeHashPovider();
-    const createUSerService = new CreateUserService(
-      fakeUserRepository,
-      fakeHashPovider,
-    );
     await createUSerService.execute(user);
-
-    const authtorizationUser = new AuthtorizationUserService(
-      fakeUserRepository,
-      fakeHashPovider,
-    );
-
     expect(
       authtorizationUser.execute({
         email: 'ahsuashuashuashuashauhs',

@@ -10,7 +10,7 @@ class FakeSendEmail implements ISendEmail {
   private emails: Email[] = [];
 
   public async sendEmail({ to, dataTemplate }: ISendEmailDTO): Promise<void> {
-    this.emails.push({ to: to.email, body: dataTemplate.template });
+    this.emails.push({ to: to.email, body: dataTemplate.file });
   }
 }
 
