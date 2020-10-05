@@ -2,6 +2,7 @@ import { uuid } from 'uuidv4';
 import ICReateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUserRepository from '@modules/users/repositories/IUserRepository';
 import User from '@modules/users/infra/typeorm/entities/Users';
+import IListProvidersDTO from '@modules/users/dtos/IListProvidersDTO';
 
 class UserRepository implements IUserRepository {
   private users: User[] = [];
@@ -16,6 +17,18 @@ class UserRepository implements IUserRepository {
     const user = this.users.find(userItem => userItem.email === email);
 
     return user;
+  }
+
+  public async findAllProviders({
+    exepctUSerId,
+  }: IListProvidersDTO): Promise<User[]> {
+    let { users } = this;
+
+    if (exepctUSerId) {
+      users = this.users.filter(user => user.id !== exepctUSerId);
+    }
+
+    return users;
   }
 
   public async create({

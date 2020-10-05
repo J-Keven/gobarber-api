@@ -1,15 +1,15 @@
 import { startOfHour } from 'date-fns';
 import AppError from '@shared/errors/AppError';
-import CreateAppointmetsService from '../../services/CreateAppointmentsServece';
+import CreateAppointmentsServece from '../../services/CreateAppointmentsServece';
 import FakeAppointmentsRepository from '../../repositories/fake/FakeAppointmentsRepository';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
-let createAppointmentsServece: CreateAppointmetsService;
+let createAppointmentsServece: CreateAppointmentsServece;
 
 describe('CreateAppointmets', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    createAppointmentsServece = new CreateAppointmetsService(
+    createAppointmentsServece = new CreateAppointmentsServece(
       fakeAppointmentsRepository,
     );
   });
@@ -32,6 +32,7 @@ describe('CreateAppointmets', () => {
       date,
       provider_id: '123123',
     };
+
     await createAppointmentsServece.execute(userData);
     expect(createAppointmentsServece.execute(userData)).rejects.toBeInstanceOf(
       AppError,

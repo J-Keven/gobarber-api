@@ -3,19 +3,19 @@
 ### Recuperação de senha
 
 **RF**
-- O usuário deve poder recuperar sua senha informando o seu E-mail.
-- O usuário deve poder receber um E-mail com instruçõe para recuperar seu senha.
-- O usuário deve poder resetar sua senha.
+- O usuário deve poder recuperar sua senha informando o seu E-mail.✅
+- O usuário deve poder receber um E-mail com instruçõe para recuperar seu senha.✅
+- O usuário deve poder resetar sua senha.✅
 
 **RNF**
-- Utilizar o meiotrap para envio de E-mails em ambiente dev.
+- Utilizar o Ethereal para envio de E-mails em ambiente dev.✅
 - Utilizar o Amazon SES para envio de E-mails em ambiente de produção dev.
 - O envio de E-mails deve acontecer em segundo plano (background job)
 
 **RN**
-- O link de recuperação deve inspirar em 2h.
+- O link de recuperação deve inspirar em 2h.✅
 - O usuário deve confirmar a nova senha ao resetar a senha.
-- O envio do E-mail so deve acontecer se existir uma conta cadastradado com o email informado.
+- O envio do E-mail so deve acontecer se existir uma conta cadastradado com o email informado.✅
 
 ### Atualização do perfil
 **RF**
