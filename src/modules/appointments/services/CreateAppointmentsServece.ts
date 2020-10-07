@@ -2,7 +2,7 @@ import { startOfHour } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import Appointments from '@modules/appointments/infra/typeorm/entities/Appointments';
-import IAppointmentRepository from '@modules/appointments/repositories/IAppointmentsRepository';
+import IAppontmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 
 interface IRequestDTO {
   provider_id: string;
@@ -11,11 +11,11 @@ interface IRequestDTO {
 
 @injectable()
 class CreateAppointmentsServece {
-  private appointmentsRepository: IAppointmentRepository;
+  private appointmentsRepository: IAppontmentsRepository;
 
   constructor(
-    @inject('AppointmentRepository')
-    appointmentsRepository: IAppointmentRepository,
+    @inject('AppointmentsRepository')
+    appointmentsRepository: IAppontmentsRepository,
   ) {
     this.appointmentsRepository = appointmentsRepository;
   }

@@ -13,7 +13,7 @@ import '@modules/users/infra/providers';
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository);
 
 container.registerSingleton<IAppointmentRepository>(
-  'AppointmentRepository',
+  'AppointmentsRepository',
   AppointmentRepository,
 );
 

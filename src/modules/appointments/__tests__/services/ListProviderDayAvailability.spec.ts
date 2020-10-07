@@ -1,14 +1,14 @@
 // import { startOfHour } from 'date-fns';
-import ListProviderMonthAvailability from '../../services/ListProviderMonthAvailability';
+import ListProviderDayAvailability from '../../services/ListProviderDayAvailability';
 import FakeAppointmentsRepository from '../../repositories/fake/FakeAppointmentsRepository';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
-let listProviderMonthAvailability: ListProviderMonthAvailability;
+let listProviderDayAvailability: ListProviderDayAvailability;
 
 describe('CreateAppointmets', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
-    listProviderMonthAvailability = new ListProviderMonthAvailability(
+    listProviderDayAvailability = new ListProviderDayAvailability(
       fakeAppointmentsRepository,
     );
   });
@@ -57,32 +57,21 @@ describe('CreateAppointmets', () => {
       date: new Date(2020, 9, 5, 17, 0, 0),
     });
 
-    await fakeAppointmentsRepository.create({
+    const monthProvider = await listProviderDayAvailability.execute({
       provider_id: 'user-id',
-      date: new Date(2020, 9, 6, 8, 0, 0),
-    });
-
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 6, 10, 0, 0),
-    });
-
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 7, 8, 0, 0),
-    });
-
-    const monthProvider = await listProviderMonthAvailability.execute({
-      provider_id: 'user-id',
+      day: 5,
       month: 10,
       year: 2020,
     });
 
     expect(monthProvider).toStrictEqual(
       expect.arrayContaining([
-        { day: 5, avilability: false },
-        { day: 6, avilability: true },
-        { day: 7, avilability: true },
+        { haur: 8, avilability: false },
+        { haur: 9, avilability: false },
+        { haur: 10, avilability: false },
+        { haur: 11, avilability: false },
+        { haur: 12, avilability: false },
+        { haur: 13, avilability: false },
       ]),
     );
   });
