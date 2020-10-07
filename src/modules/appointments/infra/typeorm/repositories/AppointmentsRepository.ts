@@ -2,6 +2,7 @@ import { Repository, getRepository, Raw } from 'typeorm';
 import IAppointmentsReporitory from '@modules/appointments/repositories/IAppointmentsRepository';
 import ICreateAppointmentsDTO from '@modules/appointments/dtos/ICreateAppointmentsDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
+import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
 import Appointments from '../entities/Appointments';
 
 class AppoitmentsRepository implements IAppointmentsReporitory {
@@ -37,6 +38,27 @@ class AppoitmentsRepository implements IAppointmentsReporitory {
     });
 
     return availebleDaysOfProvider;
+  }
+
+  public async findAllInDayFromProvider({
+    provider_id,
+    day,
+    month,
+    year,
+  }: IFindAllInDayFromProviderDTO): Promise<Appointments[]> {
+    const parserMonth = month.toString().padEnd(2, '0');
+    const parserDay = day.toString().padEnd(2, '0');
+
+    const availebleHoursOfProvider = await this.ormRepository.find({
+      where: {
+        provider_id,
+        date: Raw(
+          dateFildName =>
+            `to_char(${dateFildName}, 'DD-MM-YYYY') = '${parserDay}-${parserMonth}-${year}'`,
+        ),
+      },
+    });
+    return availebleHoursOfProvider;
   }
 
   public async create({

@@ -12,7 +12,7 @@ describe('CreateAppointmets', () => {
       fakeAppointmentsRepository,
     );
   });
-  it('should be able to create a new appointment', async () => {
+  it('should be able to list all appointments availability in a month', async () => {
     await fakeAppointmentsRepository.create({
       provider_id: 'user-id',
       date: new Date(2020, 9, 5, 8, 0, 0),

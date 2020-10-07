@@ -12,34 +12,7 @@ describe('CreateAppointmets', () => {
       fakeAppointmentsRepository,
     );
   });
-  it('should be able to create a new appointment', async () => {
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 8, 0, 0),
-    });
-
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 7, 0, 0),
-    });
-
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 10, 0, 0),
-    });
-
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 11, 0, 0),
-    });
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 12, 0, 0),
-    });
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 13, 0, 0),
-    });
+  it('should be able to list all appointments availability in day', async () => {
     await fakeAppointmentsRepository.create({
       provider_id: 'user-id',
       date: new Date(2020, 9, 5, 14, 0, 0),
@@ -48,13 +21,9 @@ describe('CreateAppointmets', () => {
       provider_id: 'user-id',
       date: new Date(2020, 9, 5, 15, 0, 0),
     });
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 16, 0, 0),
-    });
-    await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
-      date: new Date(2020, 9, 5, 17, 0, 0),
+
+    jest.spyOn(Date, 'now').mockImplementationOnce(() => {
+      return new Date(2020, 9, 5, 11).getTime();
     });
 
     const monthProvider = await listProviderDayAvailability.execute({
@@ -66,12 +35,14 @@ describe('CreateAppointmets', () => {
 
     expect(monthProvider).toStrictEqual(
       expect.arrayContaining([
-        { haur: 8, avilability: false },
-        { haur: 9, avilability: false },
-        { haur: 10, avilability: false },
-        { haur: 11, avilability: false },
-        { haur: 12, avilability: false },
-        { haur: 13, avilability: false },
+        { hour: 8, avilability: false },
+        { hour: 9, avilability: false },
+        { hour: 10, avilability: false },
+        { hour: 11, avilability: false },
+        { hour: 12, avilability: true },
+        { hour: 13, avilability: true },
+        { hour: 14, avilability: false },
+        { hour: 15, avilability: false },
       ]),
     );
   });
