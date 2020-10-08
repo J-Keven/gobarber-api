@@ -23,6 +23,13 @@ export default class Appointments {
   provider: Users;
 
   @Column()
+  user_id: string;
+
+  @ManyToOne(() => Users)
+  @JoinColumn({ name: 'user_id' })
+  user: Users;
+
+  @Column()
   date: Date;
 
   @CreateDateColumn()

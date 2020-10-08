@@ -39,6 +39,7 @@ class ListProviderDayAvailability {
         year,
       },
     );
+
     const hourStart = 8;
     const hoursOfDay = Array.from(
       { length: 10 },

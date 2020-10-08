@@ -26,11 +26,9 @@ class AppoitmentsRepository implements IAppointmentsReporitory {
       return (
         appointment.provider_id === provider_id &&
         appointment.date.getMonth() + 1 === month &&
-        appointment.date.getFullYear() === year &&
-        appointment.date.getDate() === year
+        appointment.date.getFullYear() === year
       );
     });
-
     return availebleDaysOfProvider;
   }
 
@@ -48,16 +46,18 @@ class AppoitmentsRepository implements IAppointmentsReporitory {
         appointment.date.getDate() === day
       );
     });
+
     return availebleDaysOfProvider;
   }
 
   public async create({
     provider_id,
+    user_id,
     date,
   }: ICreateAppointmentsDTO): Promise<Appointments> {
     const appotiments = new Appointments();
 
-    Object.assign(appotiments, { id: uuid(), provider_id, date });
+    Object.assign(appotiments, { id: uuid(), provider_id, user_id, date });
 
     this.appointmens.push(appotiments);
     return appotiments;

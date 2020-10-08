@@ -7,6 +7,8 @@ import CreateAppointmentsServece from '@modules/appointments/services/CreateAppo
 class AppoitmentsController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { provider_id, date } = request.body;
+    const user_id = request.user.id;
+
     const parsedDate = parseISO(date);
     const createAppointmentsServece = container.resolve(
       CreateAppointmentsServece,
@@ -14,6 +16,7 @@ class AppoitmentsController {
 
     const appointments = await createAppointmentsServece.execute({
       provider_id,
+      user_id,
       date: parsedDate,
     });
 

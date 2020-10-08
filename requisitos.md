@@ -43,17 +43,17 @@
 
 ### Agendamento de Senviço
 **RF**
-- O usuário deve poder listar todos os prestadores de serviços cadastrados.
-- O usuário deve poder listar todos todos os dias de um mês disponível de um prestador.
-- O usuário deve poder listar todos todos os horários de um dia disponível de um prestador.
-- O usuário deve poder realizar um novo agendameto com um prestador.
+- O usuário deve poder listar todos os prestadores de serviços cadastrados.✅
+- O usuário deve poder listar todos todos os dias de um mês disponível de um prestador.✅
+- O usuário deve poder listar todos todos os horários de um dia disponível de um prestador.✅
+- O usuário deve poder realizar um novo agendameto com um prestador.✅
 
 **RNF**
 - A listagem de prestadores devem ser armazendas em cache.
 
 **RN**
-- Cada agendamento deve durar exatamente 1h.
-- Os agendamentos devem estar disponíveis entre 8hrs e 18hrs.
-- O usuário não pode agendar em um horáro já ocupado.
-- O usuário não pode agendar em um horáro já ocupado.
-- O usuário não pode agendar um serviço consigo mesmo.
+- Cada agendamento deve durar exatamente 1h.✅
+- O usuário não pode agendar em um horáro já ocupado.✅
+- O usuário não pode agendar em um horáro que já passou.✅
+- Os agendamentos devem estar disponíveis entre 8hrs e 18hrs.✅
+- O usuário não pode agendar um serviço consigo mesmo.✅

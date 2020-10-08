@@ -1,5 +1,5 @@
 // import { startOfHour } from 'date-fns';
-import ListProviderDayAvailability from '../../services/ListProviderDayAvailability';
+import ListProviderDayAvailability from '../../services/ListProviderDayAvailabilityService';
 import FakeAppointmentsRepository from '../../repositories/fake/FakeAppointmentsRepository';
 
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
@@ -14,11 +14,13 @@ describe('CreateAppointmets', () => {
   });
   it('should be able to list all appointments availability in day', async () => {
     await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
+      provider_id: 'provider-id',
+      user_id: 'user-id',
       date: new Date(2020, 9, 5, 14, 0, 0),
     });
     await fakeAppointmentsRepository.create({
-      provider_id: 'user-id',
+      provider_id: 'provider-id',
+      user_id: 'user-id',
       date: new Date(2020, 9, 5, 15, 0, 0),
     });
 
@@ -27,7 +29,7 @@ describe('CreateAppointmets', () => {
     });
 
     const monthProvider = await listProviderDayAvailability.execute({
-      provider_id: 'user-id',
+      provider_id: 'provider-id',
       day: 5,
       month: 10,
       year: 2020,

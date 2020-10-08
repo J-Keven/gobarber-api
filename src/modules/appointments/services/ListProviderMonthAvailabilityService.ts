@@ -48,7 +48,6 @@ class ListProviderMonthAvailability {
       const appointmentsOfDay = appointments.filter(appointment => {
         return appointment.date.getDate() === day;
       });
-
       return {
         day,
         avilability: appointmentsOfDay.length < 10,
