@@ -1,19 +1,15 @@
 import { Router } from 'express';
 import ensureAtheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import AppointmentsController from '../controllers/AppointmentsController';
+import ListaAppointmentsProviderController from '../controllers/ListaAppointmentsProviderController';
 
 const appointmentsRoute = Router();
 appointmentsRoute.use(ensureAtheticated);
 
 const appointmentsController = new AppointmentsController();
-// appointmentsRoute.get('/', async (req, res) => {
-//   // const appointmentsRepository = getCustomRepository(AppointmentsRepository);
-
-//   const appointments = await appointmentsRepository.find();
-
-//   res.json(appointments);
-// });
+const listaAppointmentsProviderController = new ListaAppointmentsProviderController();
 
 appointmentsRoute.post('/', appointmentsController.create);
+appointmentsRoute.get('/me', listaAppointmentsProviderController.index);
 
 export default appointmentsRoute;
