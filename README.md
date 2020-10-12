@@ -45,15 +45,16 @@ Para ver os requisitos da aplicação [click aqui](https://github.com/J-Keven/Go
     $ cd gobarber-api
   ```
 3. Alterando as informações de conexão com o Banco:
-  - Abra o arquivo ``ormconfig.json`` as informaçõe do seu banco.
+  - Abra o arquivo ``ormconfig.json`` e coloque as informaçõe do seu banco. 
+   Ex:
   ```json
   {
-    "type": "postgres",
-    "host": "localhost",
+    "type": "postgres",//tipo de banco, postgres, mysql
+    "host": "localhost",//onde está sedo executando o banco
     "port": 5432,
     "username": "postgres",
     "password": "docker",
-    "database": "gobarber",
+    "database": "gobarber",//nome do banco
   }
   ```
 4. Instale as depedências:
