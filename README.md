@@ -47,7 +47,7 @@ Para ver os requisitos da aplicação [click aqui](https://github.com/J-Keven/Go
 3. Alterando as informações de conexão com o Banco:
   - Abra o arquivo ``ormconfig.json`` e coloque as informaçõe do seu banco. 
    Ex:
-  ```json
+  ```javascript
   {
     "type": "postgres",//tipo de banco, postgres, mysql
     "host": "localhost",//onde está sedo executando o banco
