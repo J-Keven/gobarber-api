@@ -12,6 +12,10 @@
   <a href="https://github.com/J-keven/gobarber-api/stargazers">
     <img alt="Stargazers" src="https://img.shields.io/github/stars/J-Keven/gobarber-api?style=social">
   </a>
+
+  <a href="https://github.com/J-Keven/Gobarber-api/network/members">
+    <img alt="Stargazers" src="https://img.shields.io/github/forks/J-keven/gobarber-api?style=social">
+  </a>
 </p>
 
 
@@ -45,7 +49,7 @@ Para ver os requisitos da aplicação [click aqui](https://github.com/J-Keven/Go
     $ cd gobarber-api
   ```
 3. Alterando as informações de conexão com o Banco:
-  - Abra o arquivo ``ormconfig.json`` e coloque as informaçõe do seu banco. 
+  - Abra o arquivo ``ormconfig.json`` e coloque as informaçõe do seu banco.
    Ex:
   ```javascript
   {
