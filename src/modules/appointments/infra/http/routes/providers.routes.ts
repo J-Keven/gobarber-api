@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import ensureAtheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-import ListProvidersController from '../controllers/ListProvidersController';
+import ListProvidersController from '../controllers/ProvidersController';
 import ProvidersMonthAvailabilityController from '../controllers/ProvidersMonthAvailabilityController';
 import ProvidersDayAvailabilityController from '../controllers/ProvidersDayAvailabilityController';
 
