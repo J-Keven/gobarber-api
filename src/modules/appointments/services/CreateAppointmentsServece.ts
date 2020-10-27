@@ -1,4 +1,4 @@
-import { startOfHour, isBefore, format } from 'date-fns';
+import { startOfHour, isBefore, format, da } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import Appointments from '@modules/appointments/infra/typeorm/entities/Appointments';
@@ -33,7 +33,6 @@ class CreateAppointmentsServece {
     date,
   }: IRequestDTO): Promise<Appointments> {
     const appointmentDate = startOfHour(date);
-
     const thisDateExist = await this.appointmentsRepository.findByDate(
       appointmentDate,
     );
