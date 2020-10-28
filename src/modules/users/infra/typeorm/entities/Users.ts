@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 
 import { Exclude, Expose } from 'class-transformer';
+import uploadConfig from '@config/upload';
 /* KISS - Keep it Simple & Stupid --- matenha simples e estúpido
  ** Esse principio diz que devemos sempre manter o codigo o mais simples e estúpido possível, para que
  ** qualquer pessoa consiga entender;
@@ -30,18 +31,23 @@ class Users {
   @Column()
   avatar: string;
 
-  @Expose({ name: 'avatar_url' })
-  getAvartUrl(): string | null {
-    return this.avatar
-      ? `${process.env.APP_API_URL}/files/${this.avatar}`
-      : null;
-  }
-
   @CreateDateColumn()
   created_at: Date;
 
   @UpdateDateColumn()
   updated_at: Date;
+
+  @Expose({ name: 'avatar_url' })
+  getAvartUrl(): string | null {
+    switch (uploadConfig.driver) {
+      case 'disk':
+        return `${process.env.APP_API_URL}/files/${this.avatar}`;
+      case 's3':
+        return `https://${uploadConfig.configs.s3.bucket}.s3.amazonaws.com/${this.avatar}`;
+      default:
+        return null;
+    }
+  }
 }
 
 export default Users;
