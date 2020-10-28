@@ -53,7 +53,7 @@ class SendForgoPasswordEmail {
         file: fileTemplatePath,
         variables: {
           name: user.name,
-          link: `http://localhost:3000/forgotPasswor?token=${token}`,
+          link: `${process.env.APP_WEB_URL}/forgotPasswor?token=${token}`,
         },
       },
     });
