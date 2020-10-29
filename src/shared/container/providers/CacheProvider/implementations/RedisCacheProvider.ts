@@ -23,7 +23,7 @@ class RedisCacheProvider implements ICacherProvider {
   }
 
   public async invalidate(key: string): Promise<void> {
-    // todo
+    await this.client.del(key);
   }
 
   public async invalidatePrefix(prefix: string): Promise<void> {

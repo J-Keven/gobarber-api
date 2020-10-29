@@ -1,9 +1,10 @@
-import { startOfHour, isBefore, format, da } from 'date-fns';
+import { startOfHour, isBefore, format } from 'date-fns';
 import { injectable, inject } from 'tsyringe';
 import AppError from '@shared/errors/AppError';
 import Appointments from '@modules/appointments/infra/typeorm/entities/Appointments';
 import IAppontmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import INotificarionsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import ICacheProvider from '@shared/container/providers/CacheProvider/model/ICacheProvoder';
 
 interface IRequestDTO {
   provider_id: string;
@@ -17,14 +18,19 @@ class CreateAppointmentsServece {
 
   private notificationsRepository: INotificarionsRepository;
 
+  private cacheProvider: ICacheProvider;
+
   constructor(
     @inject('AppointmentsRepository')
     appointmentsRepository: IAppontmentsRepository,
     @inject('NotificationsRepository')
     notificationsRepository: INotificarionsRepository,
+    @inject('CacheProvider')
+    cacheProvider: ICacheProvider,
   ) {
     this.appointmentsRepository = appointmentsRepository;
     this.notificationsRepository = notificationsRepository;
+    this.cacheProvider = cacheProvider;
   }
 
   public async execute({
@@ -69,6 +75,10 @@ class CreateAppointmentsServece {
       content: `Um novo agendameto para o dia ${dateFormatted}`,
       recipient_id: provider_id,
     });
+
+    await this.cacheProvider.invalidate(
+      `appointments-list:${provider_id}:${format(appointmentDate, 'yyyy-M-d')}`,
+    );
 
     return newAppointment;
   }
