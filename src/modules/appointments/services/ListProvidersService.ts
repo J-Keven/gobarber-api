@@ -23,10 +23,12 @@ class ListProviders {
     let provider = await this.cacheProvider.recover<User[]>(
       `provider-list:${userId}`,
     );
+
     if (!provider) {
       provider = await this.userRepository.findAllProviders({
         exepctUSerId: userId,
       });
+
       console.log('a query foi feita no banco');
       await this.cacheProvider.save(`provider-list:${userId}`, provider);
     }

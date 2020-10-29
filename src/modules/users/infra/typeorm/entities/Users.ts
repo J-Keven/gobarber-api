@@ -39,6 +39,9 @@ class Users {
 
   @Expose({ name: 'avatar_url' })
   getAvartUrl(): string | null {
+    if (!this.avatar) {
+      return null;
+    }
     switch (uploadConfig.driver) {
       case 'disk':
         return `${process.env.APP_API_URL}/files/${this.avatar}`;

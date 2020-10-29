@@ -5,12 +5,14 @@ import { resolve } from 'path';
 interface IS3 {
   bucket: string;
 }
+
 interface IStorage {
   disk: {
     // properties
   };
   s3: IS3;
 }
+
 interface IUpload {
   driver: 's3' | 'disk';
   tempPath: string;
