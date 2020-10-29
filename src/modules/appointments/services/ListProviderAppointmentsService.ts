@@ -1,6 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import IAppointmentsRepository from '@modules/appointments/repositories/IAppointmentsRepository';
 import Appointments from '@modules/appointments/infra/typeorm/entities/Appointments';
+import ICacheProvider from '@shared/container/providers/CacheProvider/model/ICacheProvoder';
 
 interface IRequestDTO {
   day: number;
@@ -13,11 +14,16 @@ interface IRequestDTO {
 class ListaProvidersAppointmentsService {
   private appointmentsRepository: IAppointmentsRepository;
 
+  private cacheProvider: ICacheProvider;
+
   constructor(
     @inject('AppointmentsRepository')
     appointmentsRepository: IAppointmentsRepository,
+    @inject('CacheProvider')
+    cacheProvider: ICacheProvider,
   ) {
     this.appointmentsRepository = appointmentsRepository;
+    this.cacheProvider = cacheProvider;
   }
 
   public async execute({
@@ -34,7 +40,6 @@ class ListaProvidersAppointmentsService {
         provider_id,
       },
     );
-
     return appointment;
   }
 }
