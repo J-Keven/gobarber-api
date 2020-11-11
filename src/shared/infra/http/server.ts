@@ -10,10 +10,13 @@ import AppError from '@shared/errors/AppError';
 import logs from '@shared/infra/http/middlewares/logsMiddleware';
 import routes from '@shared/infra/http/routes';
 import uploadConfig from '@config/upload';
+import rateLimiterMiddleware from './middlewares/rateLimiterMiddleware';
+
 import '@shared/container';
 import '@shared/infra/typeorm';
 
 const app = express();
+app.use(rateLimiterMiddleware);
 app.use(cors());
 app.use(express.json());
 app.use(logs);
