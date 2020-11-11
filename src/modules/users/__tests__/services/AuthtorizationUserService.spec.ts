@@ -4,7 +4,9 @@ import CreateUserService from '@modules/users/services/CreateUsersService';
 import User from '@modules/users/infra/typeorm/entities/Users';
 import AppError from '@shared/errors/AppError';
 import FakeHashPovider from '@modules/users/infra/providers/hashProviders/fake/FakeHashProviderRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fake/FakeCacheProvider';
 
+let fakeCacheProvider: FakeCacheProvider;
 let fakeUserRepository: FakeUserRepository;
 let fakeHashPovider: FakeHashPovider;
 let createUSerService: CreateUserService;
@@ -13,9 +15,11 @@ describe('AuthtorizationUser', () => {
   beforeEach(() => {
     fakeUserRepository = new FakeUserRepository();
     fakeHashPovider = new FakeHashPovider();
+    fakeCacheProvider = new FakeCacheProvider();
     createUSerService = new CreateUserService(
       fakeUserRepository,
       fakeHashPovider,
+      fakeCacheProvider,
     );
     authtorizationUser = new AuthtorizationUserService(
       fakeUserRepository,

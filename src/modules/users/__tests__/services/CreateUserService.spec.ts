@@ -2,6 +2,7 @@ import AppError from '@shared/errors/AppError';
 import CreateUserService from '@modules/users/services/CreateUsersService';
 import UserRepository from '@modules/users/repositories/fake/FakeUserRepository';
 import FakeHashPovider from '@modules/users/infra/providers/hashProviders/fake/FakeHashProviderRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fake/FakeCacheProvider';
 
 const userData = {
   name: 'jhonnas',
@@ -12,12 +13,18 @@ const userData = {
 let userRepository: UserRepository;
 let fakeHashPovider: FakeHashPovider;
 let createUserService: CreateUserService;
+let fakeCacheProvider: FakeCacheProvider;
 
 describe('CreateUser', () => {
   beforeEach(() => {
     userRepository = new UserRepository();
     fakeHashPovider = new FakeHashPovider();
-    createUserService = new CreateUserService(userRepository, fakeHashPovider);
+    fakeCacheProvider = new FakeCacheProvider();
+    createUserService = new CreateUserService(
+      userRepository,
+      fakeHashPovider,
+      fakeCacheProvider,
+    );
   });
   it('should be able to create a new user', async () => {
     const user = await createUserService.execute(userData);

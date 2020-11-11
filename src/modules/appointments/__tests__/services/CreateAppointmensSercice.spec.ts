@@ -2,9 +2,11 @@ import { startOfHour } from 'date-fns';
 import AppError from '@shared/errors/AppError';
 import FakeNotificationsRepository from '@modules/notifications/repositories/fake/FakeNotificationsRepository';
 import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fake/FakeCacheProvider';
 import CreateAppointmentsServece from '../../services/CreateAppointmentsServece';
 import FakeAppointmentsRepository from '../../repositories/fake/FakeAppointmentsRepository';
 
+let fakeCacheProvider: FakeCacheProvider;
 let fakeAppointmentsRepository: FakeAppointmentsRepository;
 let fakeNotificationsRepository: INotificationsRepository;
 let createAppointmentsServece: CreateAppointmentsServece;
@@ -13,11 +15,14 @@ describe('CreateAppointmets', () => {
   beforeEach(() => {
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
     fakeNotificationsRepository = new FakeNotificationsRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     createAppointmentsServece = new CreateAppointmentsServece(
       fakeAppointmentsRepository,
       fakeNotificationsRepository,
+      fakeCacheProvider,
     );
   });
+
   it('should be able to create a new appointment', async () => {
     const date = new Date(2020, 9, 7, 13);
     const startDate = startOfHour(date);

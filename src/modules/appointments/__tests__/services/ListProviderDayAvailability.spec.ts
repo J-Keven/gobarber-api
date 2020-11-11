@@ -1,4 +1,3 @@
-// import { startOfHour } from 'date-fns';
 import ListProviderDayAvailability from '../../services/ListProviderDayAvailabilityService';
 import FakeAppointmentsRepository from '../../repositories/fake/FakeAppointmentsRepository';
 
