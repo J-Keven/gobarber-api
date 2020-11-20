@@ -39,9 +39,10 @@ class CreateAppointmentsServece {
     date,
   }: IRequestDTO): Promise<Appointments> {
     const appointmentDate = startOfHour(date);
-    const thisDateExist = await this.appointmentsRepository.findByDate(
-      appointmentDate,
-    );
+    const thisDateExist = await this.appointmentsRepository.findByDate({
+      date: appointmentDate,
+      provider_id,
+    });
 
     if (thisDateExist) {
       throw new AppError('This appointment is already booked');

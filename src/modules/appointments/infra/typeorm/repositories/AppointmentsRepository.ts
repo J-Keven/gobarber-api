@@ -3,6 +3,7 @@ import IAppointmentsReporitory from '@modules/appointments/repositories/IAppoint
 import ICreateAppointmentsDTO from '@modules/appointments/dtos/ICreateAppointmentsDTO';
 import IFindAllInMonthFromProviderDTO from '@modules/appointments/dtos/IFindAllInMonthFromProviderDTO';
 import IFindAllInDayFromProviderDTO from '@modules/appointments/dtos/IFindAllInDayFromProviderDTO';
+import IFindByDateDTO from '@modules/appointments/dtos/IFindByDateDTO';
 import Appointments from '../entities/Appointments';
 
 class AppoitmentsRepository implements IAppointmentsReporitory {
@@ -12,9 +13,12 @@ class AppoitmentsRepository implements IAppointmentsReporitory {
     this.ormRepository = getRepository(Appointments);
   }
 
-  public async findByDate(date: Date): Promise<Appointments | undefined> {
+  public async findByDate({
+    date,
+    provider_id,
+  }: IFindByDateDTO): Promise<Appointments | undefined> {
     const findAppointments = await this.ormRepository.findOne({
-      where: { date },
+      where: { date, provider_id },
     });
 
     return findAppointments;
@@ -57,6 +61,7 @@ class AppoitmentsRepository implements IAppointmentsReporitory {
             `to_char(${dateFildName}, 'DD-MM-YYYY') = '${parserDay}-${parserMonth}-${year}'`,
         ),
       },
+      relations: ['user'],
     });
     return availebleHoursOfProvider;
   }

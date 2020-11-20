@@ -2,13 +2,13 @@ import { Router } from 'express';
 import { celebrate, Segments, Joi } from 'celebrate';
 import ensureAtheticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
 import AppointmentsController from '../controllers/AppointmentsController';
-import ListaAppointmentsProviderController from '../controllers/ProviderAppointmentsController';
+import ProviderAppointmentsController from '../controllers/ProviderAppointmentsController';
 
 const appointmentsRoute = Router();
 appointmentsRoute.use(ensureAtheticated);
 
 const appointmentsController = new AppointmentsController();
-const listaAppointmentsProviderController = new ListaAppointmentsProviderController();
+const providerAppointmentsController = new ProviderAppointmentsController();
 
 appointmentsRoute.post(
   '/',
@@ -20,6 +20,6 @@ appointmentsRoute.post(
   }),
   appointmentsController.create,
 );
-appointmentsRoute.get('/me', listaAppointmentsProviderController.index);
+appointmentsRoute.get('/me', providerAppointmentsController.index);
 
 export default appointmentsRoute;
