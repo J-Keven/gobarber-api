@@ -16,11 +16,11 @@ import '@shared/container';
 import '@shared/infra/typeorm';
 
 const app = express();
-app.use(rateLimiterMiddleware);
 app.use(cors());
 app.use(express.json());
 app.use(logs);
 app.use('/files', express.static(uploadConfig.uploadPath));
+app.use(rateLimiterMiddleware);
 app.use(routes);
 app.use(errors());
 
